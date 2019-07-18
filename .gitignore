@@ -1,32 +1,621 @@
-# Prerequisites
-*.d
+/* ESTE CODIGO ES PARTE DE LOS MATERIALES DE ESTUDIO DE LA SERIE "Aprenda Estructuras de Datos como em Primaria" */
+/* DEL PROFESOR  Braulio Barrios */
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+#include <iostream>
+#include <conio.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdio.h>
 
-# Precompiled Headers
-*.gch
-*.pch
+using namespace std;
+struct ALUMNOS
+{
+	long CODIGOS;
+	char NOMBRES[40];
+	float P1,P2,EF,DEFI;	
+ }ALUMNOS[20];
+  
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+int NEL, I;
 
-# Fortran module files
-*.mod
-*.smod
+// declaracion de mis funciones
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+void CAPTURAR_DATOS1();
+void CAPTURAR_DATOS2();
+void CAPTURAR_DATOS3();
+void INFORME();
+void PROCESAR_NOTAS1();
+void AGREGAR1();
+void AGREGAR2();
+void CONSULTAR_DATOS1();
+void CONSULTAR_DATOS2();
+void BORRAR1();
+void BORRAR2();
+void ACTUALIZAR();
+void AGREGAR_SIN_DUPLICADOS();
+void MAYOR_VALOR();
+void VERIFICAR_DUPLICADOS(); 
 
-# Executables
-*.exe
-*.out
-*.app
+void MENU();
+
+
+void  CAPTURAR_DATOS1(){
+  system("cls");
+
+  cout << " Cuantos Alumnos ? ";
+  cin >> NEL;
+  if ( (NEL < 0) && (NEL > 100 ) )
+  {
+     cout << " ERROR, RECTIFIQUE EL NUMERO DE ELEMENTOS A INTRODUCIR ";
+     getch();
+  }
+  else
+  {
+    for ( I=1; I<= NEL; I++)
+    {
+      cout << "  Digite Codigo del Alumno ", I; cin >>ALUMNOS[I+1].CODIGOS;
+      cout << "  Digite Nombre del alumno " ,I; cin>> ALUMNOS[I+1].NOMBRES;
+      cout << "  PRIMER PARCIAL ? "; cin >> ALUMNOS[I+1].P1;
+      cout << "  SEGUNDO PARCIAL ? "; cin >> ALUMNOS[I+1].P2 ;
+      cout << "  EXAMEN FINAL ? "; cin >> ALUMNOS[I+1].EF ;
+    }
+   
+}
+
+}
+
+void  CAPTURAR_DATOS2(){
+	system("cls");
+	char Mas;
+    NEL=0; Mas='S';
+	while (Mas=='S' && NEL<=20)
+	{
+		NEL=NEL+1;
+		system("cls");
+		cout <<"****captura de datos del estudiante**** \n\n";
+		cout <<"digite codigo del alumno "; cin >>ALUMNOS[NEL+1].CODIGOS;
+		cout <<"digite nombre del alumno "; cin >>ALUMNOS[NEL+1].NOMBRES;
+		cout << "  PRIMER PARCIAL ? "; cin >> ALUMNOS[NEL+1].P1 ;
+        cout << "  SEGUNDO PARCIAL ? "; cin >>ALUMNOS[NEL+1].P2;
+        cout << "  EXAMEN FINAL ? "; cin >> ALUMNOS[NEL+1].EF ;
+		cout <<"desea seguir introduciendo informacion de alumnos [S/N]?"; 
+		cin >>Mas;
+		
+	}
+	if(	NEL>20)
+    {
+    	cout <<"ERROR,ya los vectores estan llenos"; 	
+	}
+	else
+	{
+		cout <<"OK. se capturaron los datos correctamente"; 
+	}
+}	
+
+void  CAPTURAR_DATOS3(){
+system("cls");
+  char MAS;
+  NEL = 0 ;
+   do
+   {
+      system("cls");
+
+      NEL = NEL + 1;
+      cout << " **** Captura de datos del Estudiante ***** \n\n" ;
+      cout << "  Digite Codigo del Alumno "; cin >>ALUMNOS[NEL+1].CODIGOS ;
+      cout << "  Digite Nombre del alumno "; cin>> ALUMNOS[NEL+1].NOMBRES;
+      cout << "  PRIMER PARCIAL ? "; cin >> ALUMNOS[NEL+1].P1 ;
+      cout << "  SEGUNDO PARCIAL ? "; cin >> ALUMNOS[NEL+1].P2 ;
+      cout << "  EXAMEN FINAL ? "; cin >> ALUMNOS[NEL+1].EF ;
+
+      cout << " Desea seguir Introduciendo Informaci�n de Alumnos[S/N] \n? ";
+      MAS = toupper (getche());
+   } while ( MAS ==  'S'   && NEL < 20);
+
+   if ( NEL > 20)
+   {
+     cout << " ERROR, Ya los vectores est�n llenos, no caben mas elementos "; getch();
+    }
+    else
+    {
+       cout << " OK. Se capturaron los datos de los alumnos correctamente �. "; getch();
+    }
+
+}  // FIN DE LA FUNCION CAPTURA3
+
+void  INFORME(){
+   system("cls");
+
+   for ( I=1; I<= NEL; I++)
+   {
+     cout << "CODIGO:"  <<  ALUMNOS[I+1].CODIGOS << " NOMBRE:  " << ALUMNOS[I+1].NOMBRES << " PRIMER P: " << ALUMNOS[I+1].P1  << " SEGUNDO P:  " << ALUMNOS[I+1].P2 << " EXAMEN F:  " << ALUMNOS[I+1].EF << " DEFINITIVA: " << ALUMNOS[I+1].DEFI<< "\n\n";
+   }
+   cout << "\n\n\n\n Pulse ENTER ... " ; getch();
+}
+
+void  PROCESAR_NOTAS1(){
+   for ( I=1; I<= NEL; I++)
+    {
+      ALUMNOS[I+1].DEFI = (0.30 * ALUMNOS[I+1].P1) + (0.30 * ALUMNOS[I+1].P2) + (0.40 * ALUMNOS[I+1].EF) ;
+    }
+}
+
+void AGREGAR1(){
+	system("cls");
+
+	char Mas;
+	Mas='S';
+	
+	while(Mas=='S' && NEL< 20)
+	{
+		cout<<"****agregar datos del estudiante \n\n";
+		if (NEL<20)
+		{
+			NEL=NEL+1; 
+			cout << "  Digite Codigo del Alumno "; cin >>ALUMNOS[NEL+1].CODIGOS;
+            cout << "  Digite Nombre del alumno "; cin>> ALUMNOS[NEL+1].NOMBRES;
+            cout << "  PRIMER PARCIAL ? "; cin >> ALUMNOS[NEL+1].P1 ;
+            cout << "  SEGUNDO PARCIAL ? "; cin >> ALUMNOS[NEL+1].P2 ;
+            cout << "  EXAMEN FINAL ? "; cin >> ALUMNOS[NEL+1].EF ;
+           
+		}
+		else
+		{
+			cout<<"los vectores estan llenos, no se admite mas alumnos";
+			
+		}
+		cout<<"desea seguir introduciendo informacion de alumnos [S/N]";cin >>Mas;
+		
+	}
+	
+	
+}
+
+void AGREGAR2(){
+	system("cls");
+	char Mas;
+	do
+	{	
+	cout<<"****agregar datos del estudiante**** \n\n";
+	if(NEL<20)
+	{
+		NEL=NEL+1;
+		cout << "  Digite Codigo del Alumno "; cin >> ALUMNOS[NEL+1].CODIGOS ;
+        cout << "  Digite Nombre del alumno "; cin>> ALUMNOS[NEL+1].NOMBRES;
+        cout << "  PRIMER PARCIAL ? "; cin >> ALUMNOS[NEL+1].P1 ;
+        cout << "  SEGUNDO PARCIAL ? "; cin >> ALUMNOS[NEL+1].P2 ;
+        cout << "  EXAMEN FINAL ? "; cin >> ALUMNOS[NEL+1].EF ;
+		
+	}
+	else
+	{
+		cout<<"los vectores estan llenos, no se admiten mas estudiantes";
+		
+	}
+	cout<<"desea seguir introduciendo mas informacion de alumnos [S/N]?";
+	cin>>Mas;
+	
+	}while (Mas=='S' && NEL<= 20);
+} 
+
+void CONSULTAR_DATOS1(){
+	 system("cls");
+	int Pos;
+	char Mas;
+	long CC;
+	char Encontro;
+	do{
+	Encontro='N';
+	
+	cout<<"****consultar informacion de estudiantes**** \n\n" ;
+	cout<<"codigo a consultar ";
+	cin>>CC;
+	
+	for(I=1;I<=NEL;I++)
+	{
+		if(CC==ALUMNOS[I+1].CODIGOS)
+		{
+			cout<<"****datos del alumno**** \n";
+			cout<<" CODIGO DEL ALUMNO: "<< ALUMNOS[I+1].CODIGOS<<"\n";
+			cout<<" NOMBRE DEL ALUMNO: "<< ALUMNOS[I+1].NOMBRES<<"\n";
+			Pos==I;
+			Encontro='S';
+		}
+	}
+	if(Encontro=='N')
+	{
+		cout<<"no esta matriculado ese alumno \n\n";
+	}
+	cout<<"desea seguir consultando informacion de alumnos [S/N]";
+	cin>>Mas;
+
+	}while(Mas=='S');
+	
+	}
+	
+void CONSULTAR_DATOS2(){
+	system("cls");
+	int Pos;
+	int I;
+	char Mas;
+	long CC;
+	char Encontro;
+		do{
+			Encontro='N';
+			I=1;
+			cout<<"****consultar informacion de estudiantes**** \n\n" ;
+	        cout<<"codigo a consultar ";
+	        cin>>CC;
+			while(I <=NEL && Encontro=='N')
+			{
+				
+			   if(CC==ALUMNOS[I+1].CODIGOS)
+		       {
+			   cout<<"datos del alumno... \n";
+			   cout<<"codigo del alumno: "<< ALUMNOS[I+1].CODIGOS<<"\n";
+			   cout<<"NOMBRE DEL ALUMNO: "<< ALUMNOS[I+1].NOMBRES<<"\n";
+			   Pos==I;
+			   Encontro='S';	
+			   }
+			   
+			   else
+			  {
+				I=I+1;
+			  }
+		   }
+		   
+		    if(Encontro=='N')
+		    {
+			cout<<"no esta matriculado ese alumno....\n ";
+		    }
+		    cout<<"desea seguir consultando informacio[S/N?..]";
+		    cin>>Mas;    
+		}while(Mas=='S');
+	}
+void BORRAR1(){
+	system("cls");
+	char mas='S';
+	int cb,I,pos;
+	char seguro;
+	while(mas=='S'|| mas=='s'){
+		mas='S';
+		char encontro='N';
+		cout<<"**BORRAR INFORMACION DE ESTUDIANTES**"<<endl;
+		cout<<"Codigo del alumno que desea retirar de la lista :"<<endl;
+		cin>>cb;
+		I=1;
+		if((cb==1)&&(cb==NEL)){
+			NEL=0;
+			cout<<"todos los datos han sido eliminados"<<endl;
+		}else{
+			while((I<=NEL)&&(encontro='N')){
+				if(cb==ALUMNOS[I+1].CODIGOS){
+					cout<<"Datos encontrados del alumno....."<<endl;
+					cout<<"Codigo del Alumno : "<<ALUMNOS[I+1].CODIGOS;
+					cout<<"nombre :"<<ALUMNOS[I+1].NOMBRES<<endl;
+					cout<<"parcial 1:"<<ALUMNOS[I+1].P1<<endl;
+					cout<<"parcial 2:"<<ALUMNOS[I+1].P2<<endl;
+					cout<<"parcial 3:"<<ALUMNOS[I+1].EF<<endl;
+					cout<<"definitiba :"<<ALUMNOS[I+1].DEFI<<endl;
+					pos=I; encontro='S';
+					cout<<"Est� seguro de retirar este Alumno de la clase??[S/N]....."<<endl;
+					cin>>seguro;
+					fflush(stdin);
+					pos=I;
+					if(seguro=='S' || seguro=='s'){
+						if(pos==NEL){
+							NEL=NEL-1;
+						}else{
+							for(I=pos;I<=NEL;I++){
+								ALUMNOS[I+1].CODIGOS=ALUMNOS[I+1].CODIGOS;
+								strcpy(ALUMNOS[I+1].NOMBRES,ALUMNOS[I+1].NOMBRES);
+								ALUMNOS[I+1].P1=ALUMNOS[I+1].P1;
+								ALUMNOS[I+1].P2=ALUMNOS[I+1].P2;
+								ALUMNOS[I+1].DEFI=ALUMNOS[I+1].DEFI; 
+							}
+						
+						}
+						NEL=NEL-1;
+					}
+				}else{
+					I=I+1;
+				}	
+			}
+			if(encontro=='N'){
+				cout<<"No est� matriculado ese alumno....."<<endl;
+			}
+		}
+		cout<<"Desea seguir Borrando Informacion de Alumnos ?"<<endl;
+		cin>>mas;
+	}
+
+}
+void BORRAR2(){
+	system("cls");
+	char Mas ='S';
+	while(Mas=='S'){
+		int POS ; 
+	    char Encontro ;
+	    char seguro ;
+	    long CB;
+		cout<<" ****BORRAR INFORMACION DE ESTUDIANTES*** \n\n ";
+		cout<<" codigo del alumno que desea retirar de la lista? ";
+		cin>>CB;
+		Encontro ='N'; I=1;
+		while (I<=NEL && Encontro =='N')
+		{
+			if(CB==ALUMNOS[I+1].CODIGOS)
+			{
+				cout << " Datos encontrados del Alumno ��..\n\n " ;
+                cout <<" Codigo del Alumno : "<<ALUMNOS[I+1].CODIGOS<<"\n "; 
+                cout <<" Nombre del alumno : "<<ALUMNOS[I+1].NOMBRES<<"\n ";
+                POS=I;
+				Encontro='S';
+			}else{
+				I=I+1;
+			}
+			
+		}
+		if (Encontro =='N')
+			{
+				cout<<" no esta matriculado ese alumno ";
+			
+			}else{
+				cout<<"esta seguro que desea retirar ese alumno de la clase [S/N]? ";
+				cin>>seguro;
+				if(seguro=='S' || seguro=='s'){
+						if(POS==NEL){
+							NEL=NEL-1;
+						}else{
+							for(I=POS;I<=NEL;I++){
+								ALUMNOS[I+1].CODIGOS=ALUMNOS[I+1].CODIGOS;
+								strcpy(ALUMNOS[I+1].NOMBRES,ALUMNOS[I+1].NOMBRES);
+					     		ALUMNOS[I+1].P1=ALUMNOS[I+1].P1;
+								ALUMNOS[I+1].P2=ALUMNOS[I+1].P2;
+								ALUMNOS[I+1].DEFI=ALUMNOS[I+1].DEFI; 
+							}
+						
+						}
+						NEL=NEL-1;
+					}
+
+			}
+		cout<<"desea seguir borrando informacion de alumno[S/N]?";
+		cin>>Mas;
+	}
+
+}
+
+void ACTUALIZAR(){
+	system("cls");
+	
+	cout<<"\n\n\t\t****BUSQUEDA DE DATOS DEL ESTUDIANTE****\n\n";
+	if(NEL == 0){
+		cout<<"\n\n\tLOS VECTORES ESTAN VACIOS, NO EXISTE NINGUN DATO GUARDADO\n";
+		getch();
+	}
+	else{
+		long CC;
+		char encontrado,modificar;
+		char MAS = 'S';
+		int posicion ,i;
+		do{
+			system("cls");
+			cout<<"\n\n\t\t****BUSQUEDA DE DATOS DEL ESTUDIANTE****\n\n";
+			cout<<"INGRESE EL CODIGO DEL ALUMNO A BUSCAR: ";cin>>CC;
+			encontrado = 'N';
+			for(i=1;i<=NEL;i++){
+				if(CC == ALUMNOS[i+1].CODIGOS){
+					system("cls");
+					cout<<"Codigo del Alumno : "<<ALUMNOS[I+1].CODIGOS;
+					cout<<"nombre :"<<ALUMNOS[I+1].NOMBRES<<endl;
+					cout<<"parcial 1:"<<ALUMNOS[I+1].P1<<endl;
+					cout<<"parcial 2:"<<ALUMNOS[I+1].P2<<endl;
+					cout<<"parcial 3:"<<ALUMNOS[I+1].EF<<endl;
+					cout<<"definitiba :"<<ALUMNOS[I+1].DEFI<<endl;
+					encontrado = 'S';
+					posicion = i;
+				}
+			}
+			if(encontrado == 'S'){
+				cout<<"DESEA MODIFICAR LOS DATOS DEL ALUMNO (S/N): \n";modificar = toupper(getche());
+				if(modificar == 'S'){
+					
+					cout<<" DIGITE CODIGO DEL ALUMNO: ";cin>>ALUMNOS[I+1].CODIGOS;
+					fflush(stdin);
+					cout<<"DIGITE NOMBRE DEL ALUMNO: ";gets(ALUMNOS[I+1].NOMBRES);
+					strcpy(ALUMNOS[posicion+1].NOMBRES,ALUMNOS[i+1].NOMBRES);
+					//gets(NOMBRES[posicion]);
+					cout<<"DIGITE NOTA PRIMER CORTE: ";cin>>ALUMNOS[posicion+1].P1;
+					cout<<"DIGITE NOTA SEGUNDO CORTE: ";cin>>ALUMNOS[posicion+1].P2;
+					cout<<"DIGITE NOTA EXAMEN FINAL: ";cin>>ALUMNOS[posicion+1].EF;
+					
+				}
+			}
+			else{
+				cout<<"\n\tEL CODIGO DEL ALUMNO QUE INTENTA BUSCAR NO SE ENCUENTRA REGISTRADO\n\n";
+			}
+			cout<<"\n\t**Desea buscar otro estudiante (S/N)**\n";
+			cout<<"\t";MAS = toupper(getche());
+			
+		}while(MAS == 'S' && NEL<=20);	
+	}
+	system("cls");
+	if(NEL >20){
+		cout<<"\n\n\tEL VECTOR YA SE LLENO; NO HAY MAS ESPACIO PARA GUARDAR MAS DATOS\n\n";
+	}
+	cout<<"\n\n\t***DATOS GUARDADOS CARRECTAMENTE***\n\n";
+}
+
+void  AGREGAR_SIN_DUPLICADOS(){
+	system("cls");
+	
+	char encontro;
+	int i;
+	cout<<"\n\n\t\t****CAPTURA DE DATOS DEL ESTUDIANTE****\n\n";
+	
+	if(NEL == 20){
+		cout<"\n\t***EL VECTOR ESTA LLENO, NO HAY ESPACIO PARA AGREGAR MAS DATOS***\n\n";
+		getch();
+	}
+	else{
+		char MAS = 'S';
+		while(MAS == 'S' && NEL<=20){
+			
+			long CC;
+			system("cls");
+			cout<<"\n\n\t\t****CAPTURA DE DATOS DEL ESTUDIANTE****\n\n";
+			cout<<"DIGITE CODIGO DEL ALUMNO: ";cin>>CC;
+			if(NEL == 0){
+				system("cls");
+				ALUMNOS[NEL+1].CODIGOS = CC;
+				cout<<"CODIGO DEL ALUMNO: "<<ALUMNOS[NEL+1].CODIGOS<<"\n";
+				fflush(stdin);
+				cout<<"DIGITE NOMBRE DEL ALUMNO: ";gets(ALUMNOS[NEL+1].NOMBRES);
+				cout<<"DIGITE NOTA PRIMER PERIODO: ";cin>>ALUMNOS[NEL+1].P1;
+				cout<<"DIGITE NOTA SEGUNDO PERIODO: ";cin>>ALUMNOS[NEL+1].P2;
+				cout<<"DIGITE NOTA EXAMEN FINAL: ";cin>>ALUMNOS[NEL+1].EF;
+				PROCESAR_NOTAS1();
+				NEL = NEL+1;
+							
+			}	
+			else{
+				encontro = 'N';i=1;
+				int Index = 0;
+				while(encontro == 'N' && Index <=NEL){
+					if(CC == ALUMNOS[Index+1].CODIGOS){
+						encontro = 'S';
+					}
+					Index = Index+1;
+					
+				}
+				if(encontro == 'N'){
+					ALUMNOS[NEL+1].CODIGOS = CC;
+					cout<<"CODIGO DEL ALUMNO: "<<ALUMNOS[NEL+1].CODIGOS;
+					fflush(stdin);
+					cout<<"DIGITE NOMBRE DEL ALUMNO: ";gets(ALUMNOS[NEL+1].NOMBRES);
+					cout<<"DIGITE NOTA PRIMER PERIODO: ";cin>>ALUMNOS[NEL+1].P1;
+					cout<<"DIGITE NOTA SEGUNDO PERIODO: ";cin>>ALUMNOS[NEL+1].P2;
+					cout<<"DIGITE NOTA EXAMEN FINAL: ";cin>>ALUMNOS[NEL+1].EF;
+					PROCESAR_NOTAS1();
+					NEL = NEL+1;
+				}
+				else{
+					cout<<"\n\n\tLA IDENTIFICACION ESTA DUPLICADA NO PUEDE INGRESAR LOS DATOS\n\n";
+				}
+			}
+			cout<<"\n\n\tDESEA AGREGAR DATOS DE OTRO ALUMNO (S/N) \t";MAS = toupper(getche());	
+		}
+	}
+}
+
+void MAYOR_VALOR(){
+    system("cls");
+	int posma,mayor;
+	int I;
+	char Mas='S';
+	while(Mas=='S'){
+			if(NEL==0){
+		cout<<"No hay datos";
+		
+		}else{
+			mayor=ALUMNOS[0].DEFI;
+			for(I=1;I<=NEL;I++){
+				if(ALUMNOS[I+1].DEFI>mayor){
+					mayor=ALUMNOS[I+1].DEFI;
+					posma=I;
+					
+				}
+			}
+			cout<<"LA NOTA DEFINITIVA MAS ALTA ES: "<<mayor<<"\n";
+			cout<<"LA SACO EL ESTUDIANTE: "<<ALUMNOS[posma+1].NOMBRES<<"\n";
+		}
+		cout<< "desea volver ?? ";
+		cin>>Mas;
+	}
+
+	}
+
+void VERIFICAR_DUPLICADOS(){
+	system("cls");
+    int d,c,j;
+	if(NEL==0){
+		system("cls");
+  		cout<<"--------VERIFICADOR DE REPETIDOS--------"<<endl;
+		cout<<"No ahi estudiantes todavia";
+	}else{
+		for(I=1;I<=NEL;I++){
+			d=ALUMNOS[I+1].CODIGOS;c=0;
+			for(j=1;j<=NEL;j++){
+				if(d==ALUMNOS[j].CODIGOS){
+					c++;
+				}
+			}
+			if(c>1){
+				system("cls");
+  				cout<<"--------ESTUDIANTE REPETIDOS--------"<<endl;
+				cout<<"El estudiante con el codigo "<<ALUMNOS[NEL+1].CODIGOS<<" esta "<<c<<" veces "<<endl;
+			}
+		}
+	}
+
+system("pause");
+}
+
+void  MENU(){
+  int  OP;
+  do{
+      system("cls");
+
+      cout << " 1.-  CAPTURA DATOS DE ESTUDIANTES  V1.0... \n";
+      cout << " 2.-  CAPTURA DATOS DE ESTUDIANTES  V2.0... \n";
+      cout << " 3.-  CAPTURA DATOS DE ESTUDIANTES  V3.0... \n";
+      cout << " 4.-  INFORME DE  ESTUDIANTES  ... \n";
+      cout << " 5.-  PROCESAR NOTAS... \n";
+      cout << " 6.-  AGREGAR ESTUDIANTES V1... \n";
+      cout << " 7.-  AGREGAR ESTUDIANTES V2... \n";
+      cout << " 8.-  CONSULTAR DATOS DE ESTUDIANTES V1.0 ... \n";
+      cout << " 9.-  CONSULTAR DATOS DE ESTUDIANTES V2.0... \n";
+      cout << " 10.- BORRAR DATOS DE ESTUDIANTE V1.0... \n";
+      cout << " 11.- BORRAR DATOS DE ESTUDIANTE V2.0... \n";
+      cout << " 12.- MODIFICAR DATOS DE  ESTUDIANTES  ... \n";
+      cout << " 13.- AGREGAR_SIN_DUPLICADOS  ... \n";
+      cout << " 14   MAYOR_VALOR...\n"; 
+      cout << " 15   VERIFICAR_DUPLICADOS...\n";
+      cout << " 16.- FIN DEL PROCESO \n\n\n";
+      cout << " OPCION ?? >>> ";
+	  cin >> OP;
+
+       switch(OP)
+       {
+        case 1: CAPTURAR_DATOS1(); break;
+        case 2: CAPTURAR_DATOS2(); break;
+        case 3: CAPTURAR_DATOS3(); break;
+        case 4: INFORME(); break;
+        case 5: PROCESAR_NOTAS1(); break;
+        case 6: AGREGAR1(); break;
+        case 7: AGREGAR2(); break;
+        case 8: CONSULTAR_DATOS1(); break;
+        case 9: CONSULTAR_DATOS2(); break;
+        case 10: BORRAR1 (); break;
+        case 11: BORRAR2(); break;
+        case 12: ACTUALIZAR(); break;
+        case 13: AGREGAR_SIN_DUPLICADOS(); break;
+        case 14: MAYOR_VALOR(); break;
+        case 15: VERIFICAR_DUPLICADOS(); break;
+        case 16: cout << " Pulse ENTER para terminar.....";       			getch();
+        break;
+        default:  cout << " \n\n\n ERROR EN OPCION ... "; 					getch();
+       }
+   } while ( OP != 16);
+}
+
+// ahora la funcion PRINCIPAL
+
+int main(){
+  MENU ();
+  
+  
+}
+
+// Escribo cada una de mis funciones
